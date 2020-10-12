@@ -1,4 +1,5 @@
 .idea
+_downloads
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
