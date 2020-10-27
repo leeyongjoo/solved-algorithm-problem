@@ -1,26 +1,19 @@
 # https://programmers.co.kr/learn/courses/30/lessons/12953?language=python3
+def compute_gcd(x, y):
+    while y:
+        x, y = y, x % y
+    return x
+
+
+def compute_lcm(x, y):
+    return x * y // compute_gcd(x, y)
+
+
 def solution(arr):
-    gcd = 0
-    for i in range(min(arr), 0, -1):
-        for a in arr:
-            if a % i != 0:
-                break
-        else:
-            gcd = i
-        if gcd > 0:
-            break
-
-    max_cm = 1
-    for a in arr:
-        max_cm *= a
-
-    for i in range(1 * gcd, max_cm + 1, gcd):
-        for a in arr:
-            if i % a != 0:
-                break
-        else:
-            return i
-
+    lcm = arr[0]
+    for a in arr[1:]:
+        lcm = compute_lcm(lcm, a)
+    return lcm
 
 if __name__ == "__main__":
     print(solution([2, 6, 8, 14]))
