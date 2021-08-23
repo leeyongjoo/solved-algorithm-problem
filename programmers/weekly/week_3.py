@@ -50,7 +50,7 @@ def solution(game_board, table):
     blocks = find_nums_dfs(table, 1)
 
     spaces_moved_sorted = list(map(sorted, map(move_block_to_zero, spaces)))  # 2차원
-    blocks_rotated_moved_sorted: list(list(list)) = []  # 3차원
+    blocks_rotated_moved_sorted: list[list[list[int]]] = []  # 3차원
     for block in blocks:
         rotated_blocks = [sorted(move_block_to_zero(block))]
         for _ in range(3):
@@ -60,10 +60,6 @@ def solution(game_board, table):
             rotated_blocks.append(block)
         blocks_rotated_moved_sorted.append(rotated_blocks)
 
-    # 빈공간은 회전시켜놓지 않음 (이동과 정렬만 수행)
-    # -> 2차원 리스트
-
-    # 3. 비교 시작
     match_block_cnt = 0
     matched_space = set()
     matched_block = set()
@@ -83,11 +79,12 @@ def solution(game_board, table):
 
 
 # 49: 빈공간과 블럭을 구한다.
-# 52: 빈공간은 회전시켜놓지 않고, 이동과 정렬만 수행해서 리스트에 담는다.
-# 53: 블럭은 미리 회전, 이동, 정렬을 수행한 결과(2차원 리스트)를 리스트에 담는다.
+# 52: 빈공간은 회전시켜놓지 않고, 이동과 정렬만 수행해서 리스트에 담는다. -> 2차원
+# 53: 블럭은 미리 회전, 이동, 정렬을 수행한 결과(2차원 리스트)를 리스트에 담는다. -> 3차원
 
-# 75: 이미 매치된 블럭 여부 검사
-# 76: 블럭의 가중치가 같은 지 검사
+# 70: 이미 매치된 블럭 여부 검사
+# 71: 블럭의 가중치가 같은 지 검사
+# 72: 회전된 블럭들을 검사
 
 if __name__ == "__main__":
     gb, t = [[1, 1, 0, 0, 1, 0], [0, 0, 1, 0, 1, 0], [0, 1, 1, 0, 0, 1], [1, 1, 0, 1, 1, 1], [1, 0, 0, 0, 1, 0],
@@ -115,7 +112,7 @@ if __name__ == "__main__":
     # 54
     print(solution(gb, t))
 
-    # ========== 테스트용 코드 ==========
+    # # ========== 테스트용 코드 ==========
     # def print_gb_t(gb, t):
     #     for row1, row2 in zip(gb, t):
     #         for col in row1:
@@ -139,8 +136,6 @@ if __name__ == "__main__":
     #             else:
     #                 print(' ', end=' ')
     #         print()
-    #
-    #
     #
     # # 1. 빈공간과 블럭을 구한다.
     # spaces = find_nums_dfs(gb, 0)
@@ -172,7 +167,6 @@ if __name__ == "__main__":
     #         print(space)
     #         print_block(tmp_space)
     #         print()
-    #
     #
     # # print(spaces)
     # # print(blocks)
